@@ -8,8 +8,6 @@ const PGUSER = process.env.PGUSER;
 const PGPASSWORD = process.env.PGPASSWORD;
 const PGPORT = process.env.PGPORT;
 
-console.log(PGHOST);
-
 export const DatabaseConfig: TypeOrmModuleOptions = {
   type: 'postgres',
   host: PGHOST,
