@@ -1,7 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource, ILike, Repository } from 'typeorm';
 import { ProductEntity } from '../entity';
 import { CreateProductDto } from 'src/modules/product/validation/create-product.dto';
+
+interface ILoadAllWithFilterAndPagination {
+  limit: number;
+  page: number;
+  search?: string;
+}
 
 @Injectable()
 export class ProductRepository {
@@ -14,5 +20,17 @@ export class ProductRepository {
     const product = new ProductEntity(data);
     const createdProduct = await this.repository.save(product);
     return createdProduct;
+  }
+
+  public async load(data: ILoadAllWithFilterAndPagination) {
+    const products = await this.repository.findAndCount({
+      take: data.limit,
+      skip: data.page * data.limit,
+      where: [
+        { name: ILike(`%${data.search ?? ''}%`) },
+        { description: ILike(`%${data.search ?? ''}%`) },
+      ],
+    });
+    return products;
   }
 }
