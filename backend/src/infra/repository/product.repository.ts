@@ -22,15 +22,28 @@ export class ProductRepository {
     return createdProduct;
   }
 
-  public async load(data: ILoadAllWithFilterAndPagination) {
+  public async load(
+    data: ILoadAllWithFilterAndPagination,
+  ): Promise<[ProductEntity[], number]> {
     const products = await this.repository.findAndCount({
       take: data.limit,
       skip: data.page * data.limit,
       where: [
-        { name: ILike(`%${data.search ?? ''}%`) },
-        { description: ILike(`%${data.search ?? ''}%`) },
+        { name: ILike(`%${data.search ?? ''}%`), deleted: 0 },
+        { description: ILike(`%${data.search ?? ''}%`), deleted: 0 },
       ],
     });
     return products;
+  }
+
+  public async loadById(id: string) {
+    const product = await this.repository.findOne({ where: { id } });
+    return product;
+  }
+
+  public async softDelete(id: string) {
+    await this.repository.update(id, {
+      deleted: 1,
+    });
   }
 }

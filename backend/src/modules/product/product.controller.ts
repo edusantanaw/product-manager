@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
   Query,
 } from '@nestjs/common';
@@ -29,5 +31,11 @@ export class ProductController {
   ) {
     const product = await this.productService.load(data);
     return product;
+  }
+
+  @Delete(':id')
+  public async delete(@Param('id') id: string) {
+    const data = await this.productService.delete(id);
+    return data;
   }
 }

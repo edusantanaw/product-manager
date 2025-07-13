@@ -22,4 +22,11 @@ export class ProductService {
     const products = await this.productRepository.load(data);
     return products;
   }
+
+  public async delete(id: string) {
+    const productExists = await this.productRepository.loadById(id);
+    if (!productExists) throw new Error('Produto não encontrado!');
+    await this.productRepository.softDelete(id);
+    return { message: 'Produto removido com sucesso!' };
+  }
 }
