@@ -64,6 +64,13 @@ export class ProductController {
     return product;
   }
 
+  @Get(':id')
+  @HttpCode(HttpStatus.OK)
+  public async loadById(@Param('id') id: string) {
+    const product = await this.productService.loadById(id);
+    return product;
+  }
+
   @Delete(':id')
   public async delete(@Param('id') id: string) {
     const data = await this.productService.delete(id);

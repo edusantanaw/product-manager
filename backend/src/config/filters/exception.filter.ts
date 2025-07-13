@@ -6,6 +6,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Response } from 'express';
+import { NotFoundError } from 'src/modules/product/error/not-found.error';
 
 @Catch(Error)
 export class ExceptionFilterImpl implements ExceptionFilter {
@@ -17,6 +18,11 @@ export class ExceptionFilterImpl implements ExceptionFilter {
       return response
         .status(exception.getStatus())
         .json({ errors: message.message, type: 'validation' });
+    }
+    if (exception instanceof NotFoundError) {
+      return response
+        .status(HttpStatus.NOT_FOUND)
+        .json({ errors: exception.message, type: 'domain' });
     }
     return response.status(HttpStatus.INTERNAL_SERVER_ERROR);
   }
