@@ -1,7 +1,7 @@
 import { Transform } from 'class-transformer';
 import { IsNotEmpty, IsPositive, IsString } from 'class-validator';
 
-export class CreateProductDto {
+export class UpdateProductDto {
   @IsNotEmpty({ message: 'O nome é obrigatorio!' })
   @IsString({ message: "O campo 'nome' deve ser uma string" })
   name: string;
@@ -12,4 +12,5 @@ export class CreateProductDto {
   @IsString({ message: "O campo 'description' deve ser uma string" })
   description: string;
   image?: string;
+  id: string;
 }

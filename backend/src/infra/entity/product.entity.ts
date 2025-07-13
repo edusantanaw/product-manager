@@ -6,13 +6,6 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-interface IProduct {
-  name?: string;
-  price: number;
-  image?: string;
-  description?: string;
-}
-
 @Entity('product')
 export class ProductEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -32,10 +25,40 @@ export class ProductEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  constructor(data: IProduct) {
-    if (data?.name) this.name = data?.name;
-    if (data?.description) this.description = data?.description;
-    if (data?.price) this.price = data?.price;
-    this.image = data?.image;
+  constructor() {}
+
+  public static build() {
+    return new this();
+  }
+
+  public setId(id: string) {
+    this.id = id;
+    return this;
+  }
+
+  public setName(name: string) {
+    this.name = name;
+    return this;
+  }
+
+  public setDescription(desc: string) {
+    this.description = desc;
+    return this;
+  }
+
+  public setDeleted(deleted: boolean) {
+    this.deleted = deleted ? 1 : 0;
+    return this;
+  }
+
+  public setPrice(price: number) {
+    if (price < 0.01) throw new Error('Preço invalido!');
+    this.price = price;
+    return this;
+  }
+
+  public setImage(imagePath?: string) {
+    this.image = imagePath;
+    return this;
   }
 }
