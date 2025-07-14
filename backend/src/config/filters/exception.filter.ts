@@ -22,8 +22,9 @@ export class ExceptionFilterImpl implements ExceptionFilter {
     if (exception instanceof NotFoundError) {
       return response
         .status(HttpStatus.NOT_FOUND)
-        .json({ errors: exception.message, type: 'domain' });
+        .json({ errors: exception.message, type: 'domain' })
+        .end();
     }
-    return response.status(HttpStatus.INTERNAL_SERVER_ERROR);
+    return response.status(HttpStatus.INTERNAL_SERVER_ERROR).end();
   }
 }

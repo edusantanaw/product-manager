@@ -22,6 +22,7 @@ import { LoadPipe } from './validation/load.pipe';
 import { join } from 'path';
 import { EnvVariables } from 'src/config/constants/env-variables';
 import { UpdateProductDto } from './validation';
+import { ImageValidationPipe } from './validation/image-validation.pipe';
 
 @Controller('/api/product')
 export class ProductController {
@@ -32,7 +33,7 @@ export class ProductController {
   @HttpCode(HttpStatus.CREATED)
   public async create(
     @Body() data: CreateProductDto,
-    @UploadedFile() image?: Express.Multer.File,
+    @UploadedFile(ImageValidationPipe) image?: Express.Multer.File,
   ) {
     const url = EnvVariables.APP_URL;
     const product = await this.productService.create({
@@ -83,7 +84,7 @@ export class ProductController {
   public async update(
     @Param('id') id: string,
     @Body() data: UpdateProductDto,
-    @UploadedFile() image?: Express.Multer.File,
+    @UploadedFile(ImageValidationPipe) image?: Express.Multer.File,
   ) {
     const url = EnvVariables.APP_URL;
     const product = await this.productService.update({
