@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { EntityException } from '../error/entity.exception';
 
 @Entity('product')
 export class ProductEntity {
@@ -52,7 +53,7 @@ export class ProductEntity {
   }
 
   public setPrice(price: number) {
-    if (price < 0.01) throw new Error('Preço invalido!');
+    if (price < 0.01) throw new EntityException('Preço invalido!');
     this.price = price;
     return this;
   }
