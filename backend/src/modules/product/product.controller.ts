@@ -13,20 +13,29 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { createReadStream, existsSync } from 'fs';
-import { ProductService } from './product.service';
-import { CreateProductDto } from './validation/create-product.dto';
-import { LoadPipe } from './validation/load.pipe';
 import { join } from 'path';
-import { EnvVariables } from 'src/config/constants/env-variables';
+import { ProductService } from './product.service';
 import { UpdateProductDto } from './validation';
+import { CreateProductDto } from './validation/create-product.dto';
 import { ImageValidationPipe } from './validation/image-validation.pipe';
+import { LoadByIDValidationDto } from './validation/load-by-id.validation';
+import { LoadPipe } from './validation/load.pipe';
 
 @Controller('/api/product')
 export class ProductController {
-  constructor(private readonly productService: ProductService) {}
+  private appURL: string;
+  private productUploadPath: string;
+  constructor(
+    private readonly productService: ProductService,
+    configService: ConfigService,
+  ) {
+    this.appURL = configService.get('APP_URL') as string;
+    this.productUploadPath = configService.get('PRODUCT_UPLOAD_PATH') as string;
+  }
 
   @Post()
   @UseInterceptors(FileInterceptor('image'))
@@ -35,20 +44,19 @@ export class ProductController {
     @Body() data: CreateProductDto,
     @UploadedFile(ImageValidationPipe) image?: Express.Multer.File,
   ) {
-    const url = EnvVariables.APP_URL;
+    const imageURL = image
+      ? `${this.appURL}/api/product/${image.filename}/image`
+      : undefined;
     const product = await this.productService.create({
       ...data,
-      image: image ? `${url}/api/product/${image.filename}/image` : undefined,
+      image: imageURL,
     });
     return product;
   }
 
   @Get(':name/image')
   public getImage(@Param('name') name: string, @Res() res: Response) {
-    const path = join(
-      process.cwd(),
-      `${EnvVariables.PRODUCT_UPLOAD_PATH}/${name}`,
-    );
+    const path = join(process.cwd(), `${this.productUploadPath}/${name}`);
     if (!existsSync(path)) {
       return res.status(HttpStatus.NOT_FOUND).end();
     }
@@ -67,14 +75,14 @@ export class ProductController {
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
-  public async loadById(@Param('id') id: string) {
-    const product = await this.productService.loadById(id);
+  public async loadById(@Param() params: LoadByIDValidationDto) {
+    const product = await this.productService.loadById(params.id);
     return product;
   }
 
   @Delete(':id')
-  public async delete(@Param('id') id: string) {
-    const data = await this.productService.delete(id);
+  public async delete(@Param() params: LoadByIDValidationDto) {
+    const data = await this.productService.delete(params.id);
     return data;
   }
 
@@ -82,15 +90,17 @@ export class ProductController {
   @UseInterceptors(FileInterceptor('image'))
   @HttpCode(HttpStatus.OK)
   public async update(
-    @Param('id') id: string,
+    @Param() params: LoadByIDValidationDto,
     @Body() data: UpdateProductDto,
     @UploadedFile(ImageValidationPipe) image?: Express.Multer.File,
   ) {
-    const url = EnvVariables.APP_URL;
+    const imageURL = image
+      ? `${this.appURL}/api/product/${image.filename}/image`
+      : undefined;
     const product = await this.productService.update({
       ...data,
-      id,
-      image: image ? `${url}/api/product/${image.filename}/image` : undefined,
+      id: params.id,
+      image: imageURL,
     });
     return product;
   }
