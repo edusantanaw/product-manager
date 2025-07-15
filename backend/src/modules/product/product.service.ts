@@ -22,7 +22,7 @@ export class ProductService {
 
   public async load(
     data: ILoadAllWithFilterAndPagination,
-  ): Promise<[ProductEntity[], number]> {
+  ): Promise<{ data: ProductEntity[]; total: number }> {
     const products = await this.productRepository.load(data);
     return products;
   }

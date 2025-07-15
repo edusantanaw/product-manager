@@ -1,0 +1,20 @@
+<div class="content">
+  <div *ngIf="loading">Loading</div>
+  <ul *ngIf="!loading && products.length > 0" class="product-list">
+    <li *ngFor="let product of products" class="product-item">
+      <img
+        [src]="product.image"
+        alt="{{ product.name }}"
+        (error)="onImageError($event)"
+      />
+      <div>
+        <h3>
+          {{ product.name }}
+        </h3>
+        <span class="text-lg font-bold text-green-600 text-end w-full">
+          {{ formatPrice(product.price) }}
+        </span>
+      </div>
+    </li>
+  </ul>
+</div>

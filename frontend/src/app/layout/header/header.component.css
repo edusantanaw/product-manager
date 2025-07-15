@@ -1,0 +1,12 @@
+.app-header {
+  padding: 2em;
+  background: #0D0C1D;
+  width: 100%;
+}
+
+  .content {
+    width: 58%;
+    margin-inline: auto;
+    color: #e2e2e2;
+}
+

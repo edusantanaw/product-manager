@@ -41,16 +41,22 @@ export class ProductRepository {
 
   public async load(
     data: ILoadAllWithFilterAndPagination,
-  ): Promise<[ProductEntity[], number]> {
-    const products = await this.repository.findAndCount({
+  ): Promise<{ data: ProductEntity[]; total: number }> {
+    const [products, total] = await this.repository.findAndCount({
       take: data.limit,
       skip: data.page * data.limit,
       where: [
         { name: ILike(`%${data.search ?? ''}%`), deleted: 0 },
         { description: ILike(`%${data.search ?? ''}%`), deleted: 0 },
       ],
+      order: {
+        createdAt: 'DESC',
+      },
     });
-    return products;
+    return {
+      total,
+      data: products,
+    };
   }
 
   public async loadById(id: string) {
