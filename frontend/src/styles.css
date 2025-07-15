@@ -5,3 +5,7 @@
   list-style: none;
   font-family: "Open Sans", sans-serif;
 }
+
+body {
+  background-color: rgb(233, 232, 235);
+}

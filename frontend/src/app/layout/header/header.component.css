@@ -1,12 +1,48 @@
 .app-header {
   padding: 2em;
-  background: #0D0C1D;
+  background: #0d0c1d;
   width: 100%;
 }
 
-  .content {
-    width: 58%;
-    margin-inline: auto;
-    color: #e2e2e2;
+.content {
+  width: 58%;
+  margin-inline: auto;
+  color: #e2e2e2;
+  display: flex;
+  align-items: center;
+  gap: 1em;
 }
 
+.icon {
+  all: unset;
+  padding: 0.4em;
+  cursor: pointer;
+  background: none;
+  color: #fff;
+  border-radius: 5px;
+  transition: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+}
+
+.icon span {
+  font-size: 2em;
+}
+
+.icon:hover {
+  background: #ffffff11;
+  color: red;
+}
+
+.search {
+  width: 100%;
+}
+
+.search input {
+  padding: 1em 1.5em;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.search input:focus {
+  outline: none;
+}
