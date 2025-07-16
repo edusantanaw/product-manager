@@ -7,6 +7,7 @@ import { CommonModule } from "@angular/common";
 import { CapitalizeWordsPipe } from "../../pipes/capitalize-words.pipe";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { CartService } from "../../services/cart.service";
+import { ConvertPricePipe } from "../../pipes/convert-price.pipe";
 
 @Component({
     standalone: true,
@@ -18,7 +19,9 @@ import { CartService } from "../../services/cart.service";
         PageContainerComponent,
         RouterModule,
         CommonModule,
-        CapitalizeWordsPipe]
+        CapitalizeWordsPipe,
+        ConvertPricePipe
+    ]
 })
 export class ViewProductComponent implements OnInit {
     product!: Product
@@ -50,6 +53,7 @@ export class ViewProductComponent implements OnInit {
                 this.loading = false
             },
             error: (err) => {
+                console.log(err)
                 this.loading = false;
                 this.router.navigateByUrl("not-found")
             }
@@ -64,14 +68,6 @@ export class ViewProductComponent implements OnInit {
     onImageError(event: Event) {
         const target = event.target as HTMLImageElement;
         target.src = this.defaultImgPath;
-    }
-
-    formatPrice(price: number) {
-        if (!price) return "R$ 0,00"
-        return price.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-        })
     }
 
     getTruncatedDescription(): SafeHtml {

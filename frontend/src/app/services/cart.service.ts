@@ -58,7 +58,7 @@ export class CartService {
 
     decreaseQuantity(productId: string) {
         let updated = this.getCart().map(item => {
-            if (item.product.id === productId) {
+            if (item.product.id === productId && item.quantity > 1) {
                 return { ...item, quantity: item.quantity - 1 };
             }
             return item;

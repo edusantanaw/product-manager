@@ -1,9 +1,13 @@
 <page-container>
   <div class="header">
     <h2>Gerenciamento De Produtos</h2>
-    <app-button label="Novo Produto" (click)="handleShowCreate()">
-    </app-button>
+    <app-button label="Novo Produto" (click)="handleShowCreate()"> </app-button>
   </div>
+  <no-data
+    *ngIf="!loading && products.length === 0"
+    message="Nenhum produto encontrado."
+  ></no-data>
+
   <product-list
     *ngIf="!loading"
     [limit]="limit"

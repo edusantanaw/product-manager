@@ -57,7 +57,6 @@ export class HeaderComponent implements OnInit {
     }
 
     handleShowMobileMenu() {
-        console.log(this.showMobileMenu)
         this.showMobileMenu = !this.showMobileMenu
     }
 }

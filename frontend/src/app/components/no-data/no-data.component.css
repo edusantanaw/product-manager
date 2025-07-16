@@ -1,0 +1,16 @@
+.no-data {
+  padding: 2em;
+  text-align: center;
+  color: #555;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  border-radius: 8px;
+  font-size: 1.5em;
+}
+
+.no-data .icon {
+  font-size: 5em;
+  color: #9ca3af;
+}

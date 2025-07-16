@@ -5,6 +5,7 @@ import { CapitalizeWordsPipe } from "../../pipes/capitalize-words.pipe";
 import { Product } from "../../types/product";
 import { DeleteProductComponent } from "../delete-product/delete-product.component";
 import { PaginationComponent } from "../pagination/pagination.component";
+import { ConvertPricePipe } from "../../pipes/convert-price.pipe";
 
 @Component({
     selector: 'product-list',
@@ -17,6 +18,7 @@ import { PaginationComponent } from "../pagination/pagination.component";
         CapitalizeWordsPipe,
         RouterModule,
         DeleteProductComponent,
+        ConvertPricePipe
     ]
 })
 export class ProductListComponent {
@@ -46,14 +48,6 @@ export class ProductListComponent {
 
     trackById(_index: number, item: any): number {
         return item.id;
-    }
-
-    formatPrice(price: number) {
-        if (!price) return "R$ 0,00"
-        return price.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-        })
     }
 
     handlePage(page: number) {

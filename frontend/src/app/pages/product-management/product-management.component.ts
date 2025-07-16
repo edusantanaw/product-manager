@@ -1,12 +1,13 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, RouterModule } from "@angular/router";
+import { AppButtonComponent } from "../../components/app-button/app-button.component";
 import { NewProductComponent } from "../../components/new-product/new-product.component";
+import { NoDataComponent } from "../../components/no-data/no-data.component";
 import { PageContainerComponent } from "../../components/page-container/page-container.component";
 import { ProductListComponent } from "../../components/product-list/product-list.component";
 import { ProductService } from "../../services/product.service";
 import { Product } from "../../types/product";
-import { AppButtonComponent } from "../../components/app-button/app-button.component";
 
 @Component({
     selector: "product-management",
@@ -14,13 +15,14 @@ import { AppButtonComponent } from "../../components/app-button/app-button.compo
     templateUrl: "./product-management.component.html",
     styleUrl: "./product-management.component.css",
     imports: [
-        PageContainerComponent,
-        CommonModule,
-        NewProductComponent,
-        RouterModule,
-        ProductListComponent,
-        AppButtonComponent
-    ],
+    PageContainerComponent,
+    CommonModule,
+    NewProductComponent,
+    RouterModule,
+    ProductListComponent,
+    AppButtonComponent,
+    NoDataComponent
+],
 })
 export class ProductManagementComponent implements OnInit {
     showCreateProduct: boolean = false

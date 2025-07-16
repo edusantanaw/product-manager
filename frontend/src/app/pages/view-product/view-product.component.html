@@ -21,7 +21,7 @@
       >
         {{ showFullDescription ? "Ver menos" : "Ver mais" }}
       </span>
-      <span class="product-price">{{ formatPrice(product.price) }}</span>
+      <span class="product-price">{{ product.price | convertPrice }}</span>
       <div class="actions">
         <div class="quantity-control">
           <button (click)="decrease()">−</button>

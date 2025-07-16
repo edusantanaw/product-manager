@@ -1,5 +1,8 @@
 <page-container>
-  <div *ngIf="loading">Loading</div>
+  <ul *ngIf="loading" class="product-list skeleton-list">
+    <li class="product-item skeleton-item" *ngFor="let index of [].constructor(limit)"></li>
+  </ul>
+  <no-data *ngIf="!loading && products.length === 0" message="Nenhum produto encontrado."></no-data>
   <ul *ngIf="!loading && products.length > 0" class="product-list">
     <li
       *ngFor="let product of products"
@@ -17,7 +20,7 @@
           {{ product.name | capitalizeWords }}
         </h3>
         <span class="text-lg font-bold text-green-600 text-end w-full">
-          {{ formatPrice(product.price) }}
+          {{ product.price | convertPrice }}
         </span>
       </div>
     </li>

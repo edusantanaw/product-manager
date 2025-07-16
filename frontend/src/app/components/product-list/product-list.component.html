@@ -13,7 +13,7 @@
             {{ product.name | capitalizeWords }}
           </h3>
           <span>
-            {{ formatPrice(product.price) }}
+            {{ product.price | convertPrice }}
           </span>
         </div>
       </div>

@@ -6,6 +6,8 @@ import { PaginationComponent } from "../../components/pagination/pagination.comp
 import { CapitalizeWordsPipe } from "../../pipes/capitalize-words.pipe";
 import { ProductService } from "../../services/product.service";
 import { Product } from "../../types/product";
+import { ConvertPricePipe } from "../../pipes/convert-price.pipe";
+import { NoDataComponent } from "../../components/no-data/no-data.component";
 
 @Component({
     selector: "product-screen",
@@ -18,6 +20,8 @@ import { Product } from "../../types/product";
         PaginationComponent,
         PageContainerComponent,
         CapitalizeWordsPipe,
+        ConvertPricePipe,
+        NoDataComponent
     ]
 })
 export class ProductComponent implements OnInit {
@@ -35,8 +39,8 @@ export class ProductComponent implements OnInit {
         private readonly router: Router
     ) { }
 
-    ngOnInit(): void {
-        this.activedRoute.queryParamMap.subscribe(params => {
+    ngOnInit() {
+        this.activedRoute.queryParamMap.subscribe( (params) => {
             this.search = params.get('search') ?? '';
             this.page = Number(params.get('page')) || 0;
             this.fetchData()
@@ -51,11 +55,11 @@ export class ProductComponent implements OnInit {
         }).subscribe({
             next: (data: { data: Product[], total: number }) => {
                 this.products = data?.data ?? []
-                console.log(data)
                 this.getTotalPages(data.total)
                 this.loading = false
             },
             error: (error) => {
+                console.log(error)
                 this.loading = false
             }
         })
@@ -96,13 +100,5 @@ export class ProductComponent implements OnInit {
 
     handleViewProduct(id: string) {
         this.router.navigateByUrl(`product/${id}`)
-    }
-
-    formatPrice(price: number) {
-        if (!price) return "R$ 0,00"
-        return price.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-        })
     }
 }
