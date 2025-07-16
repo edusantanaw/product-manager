@@ -50,8 +50,8 @@ export class DeleteProductComponent {
                 this.cartService.removeFromCart(this.id)
             },
             error: (err) => {
-                const { error: { errors } } = err as { error: { errors: string[] } }
-                this.errorMessage = errors[0]
+               const { error: { error } } = err as { error: { error: string } }
+                this.errorMessage = error
                 this.errorAlert = true
                 this.deleteRunning = true
             }

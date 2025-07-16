@@ -21,7 +21,7 @@ import { join } from 'path';
 import { ProductService } from './product.service';
 import { UpdateProductDto } from './validation';
 import { CreateProductDto } from './validation/create-product.dto';
-import { ImageValidationPipe } from './validation/image-validation.pipe';
+import { ImageValidationPipe } from './pipe/image-validation.pipe';
 import { LoadByIDValidationDto } from './validation/load-by-id.validation';
 import { LoadPipe } from './validation/load.pipe';
 

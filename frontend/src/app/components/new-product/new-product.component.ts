@@ -108,8 +108,9 @@ export class NewProductComponent implements OnInit, OnDestroy {
                 this.createRunning = false
             },
             error: (err) => {
-                const { error: { errors } } = err as { error: { errors: string[] } }
-                this.errorMessage = errors[0]
+                console.log(err)
+                const { error: { error } } = err as { error: { error: string } }
+                this.errorMessage = error
                 this.errorAlert = true
                 this.createRunning = false
             }
