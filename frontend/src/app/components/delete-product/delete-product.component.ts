@@ -3,6 +3,7 @@ import { Component, Input } from "@angular/core";
 import { ProductService } from "../../services/product.service";
 import { ModalComponent } from "../modal/modal.component";
 import { SweetAlertComponent } from "../sweet-alert/sweet-alert.component";
+import { CartService } from "../../services/cart.service";
 
 @Component({
     selector: "delete-product",
@@ -26,6 +27,7 @@ export class DeleteProductComponent {
 
     constructor(
         private readonly productService: ProductService,
+        protected readonly cartService: CartService
     ) { }
 
     onConfirmDelete() {
@@ -45,6 +47,7 @@ export class DeleteProductComponent {
             next: () => {
                 this.confirmModal = true
                 this.deleteRunning = true
+                this.cartService.removeFromCart(this.id)
             },
             error: (err) => {
                 const { error: { errors } } = err as { error: { errors: string[] } }

@@ -1,6 +1,12 @@
 <header class="app-header">
   <div class="content">
-    <button class="icon" (click)="handleHome()">
+    <span
+      class="material-symbols-outlined menu-btn"
+      (click)="handleShowMobileMenu()"
+    >
+      menu
+    </span>
+    <button class="icon desktop" (click)="handleHome()">
       <span class="material-symbols-outlined">home </span>
     </button>
     <div class="search">
@@ -11,7 +17,7 @@
         [(ngModel)]="search"
       />
     </div>
-    <ul class="pages">
+    <ul class="pages desktop">
       <li
         *ngFor="let page of pages"
         [ngClass]="{ selected: isCurrentPage(page.route) }"
@@ -24,5 +30,17 @@
       <span class="cart-itens" *ngIf="getCartQuantity() > 0"></span>
       shopping_cart
     </span>
+    <div *ngIf="showMobileMenu" class="mobile">
+      <div class="close-mobile" (click)="handleShowMobileMenu()"></div>
+      <ul class="mobile-pages">
+        <li
+          *ngFor="let page of pages"
+          [ngClass]="{ selected: isCurrentPage(page.route) }"
+          (click)="handleNavigate(page.route)"
+        >
+          {{ page.name }}
+        </li>
+      </ul>
+    </div>
   </div>
 </header>

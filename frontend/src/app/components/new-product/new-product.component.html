@@ -66,17 +66,17 @@
 
     <div class="buttons">
       <app-button
-        [disabled]="createRunning"
-        btnType="submit"
-        [disabled]="productForm.invalid"
-        label="Salvar"
-      >
-      </app-button>
-      <app-button
         label="Cancelar"
         [disabled]="createRunning"
         (click)="handleshow()"
         type="danger"
+      >
+      </app-button>
+      <app-button
+        [disabled]="createRunning"
+        btnType="submit"
+        [disabled]="productForm.invalid"
+        label="Salvar"
       >
       </app-button>
     </div>

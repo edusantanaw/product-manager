@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component, Input } from "@angular/core";
-import { Product } from "../../types/product";
 import { CommonModule } from "@angular/common";
-import { PaginationComponent } from "../pagination/pagination.component";
-import { CapitalizeWordsPipe } from "../../pipes/capitalize-words.pipe";
+import { Component, Input } from "@angular/core";
 import { ActivatedRoute, Router, RouterModule } from "@angular/router";
+import { CapitalizeWordsPipe } from "../../pipes/capitalize-words.pipe";
+import { Product } from "../../types/product";
 import { DeleteProductComponent } from "../delete-product/delete-product.component";
+import { PaginationComponent } from "../pagination/pagination.component";
 
 @Component({
     selector: 'product-list',

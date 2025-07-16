@@ -77,3 +77,15 @@
 .editor {
   padding: 0.5em;
 }
+
+@media (max-width: 1000px) {
+  .create-product {
+    width: 30em;
+  }
+}
+
+@media (max-width: 600px) {
+  .create-product {
+    width: 95%;
+  }
+}

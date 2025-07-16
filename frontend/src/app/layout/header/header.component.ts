@@ -13,6 +13,7 @@ import { CartService } from "../../services/cart.service";
 export class HeaderComponent implements OnInit {
     search: string = ""
     pages: { name: string, route: string }[] = [{ name: "Produtos", route: "" }, { name: "Gerenciamento", route: "management" }]
+    showMobileMenu: boolean = false
 
     constructor(
         private readonly router: Router,
@@ -47,10 +48,16 @@ export class HeaderComponent implements OnInit {
     }
 
     handleNavigate(route: string) {
+        if(this.showMobileMenu) this.showMobileMenu = false
         this.router.navigateByUrl(route)
     }
 
     getCartQuantity() {
         return this.cartService.getTotalQuantity()
+    }
+
+    handleShowMobileMenu() {
+        console.log(this.showMobileMenu)
+        this.showMobileMenu = !this.showMobileMenu
     }
 }

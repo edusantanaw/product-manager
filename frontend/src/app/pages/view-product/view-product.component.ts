@@ -102,6 +102,7 @@ export class ViewProductComponent implements OnInit {
     addProduct() {
         this.cartService.addToCart(this.product, this.itemQtd)
         this.cartService.open()
+        this.itemQtd = 1
     }
 
     increase() {

@@ -22,12 +22,24 @@
 }
 
 .item {
-  width: 100%;
+  width: 95%;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .delete-btn {
   font-size: 2em;
   color: red;
   cursor: pointer;
+}
+
+.infos {
+  width: 90%;
+  overflow: hidden;
+}
+
+.infos h3 {
+  max-width: 100%;
+  overflow: hidden;
 }

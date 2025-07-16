@@ -52,3 +52,12 @@
   color: red;
   background-color: red;
 }
+
+@media (max-width: 650px) {
+  .nav-button {
+    font-size: 0.7em;
+  }
+  .page-button {
+    padding: 0.5em 1em;
+  }
+}

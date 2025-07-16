@@ -4,6 +4,8 @@
   gap: 1em;
   min-height: 50vh;
   position: relative;
+  background-color: #fff;
+  box-shadow: 1px 1px 4px 1px #0000002c;
 }
 
 .img-container,
@@ -13,9 +15,7 @@
   flex-direction: column;
   gap: 1em;
   flex: 1;
-  background-color: #fff;
   padding: 3em;
-  box-shadow: 1px 1px 4px 1px #0000002c;
   min-height: 50vh;
 }
 
@@ -30,12 +30,13 @@
   border-radius: 8px;
   object-fit: cover;
   width: 100%;
-  background-color: #fff;
 }
 
 .product-name {
   font-size: 1.4em;
   font-weight: 600;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .product-price {
@@ -69,6 +70,8 @@
 }
 
 .actions {
+  margin-top: 0.5em;
+
   display: flex;
   align-items: center;
   gap: 2em;
@@ -78,7 +81,6 @@
   display: flex;
   align-items: center;
   gap: 0.5em;
-  margin-top: 0.5em;
 }
 
 .quantity-control button {
@@ -94,4 +96,32 @@
 
 .quantity-control button:hover {
   background-color: #cbd5e1;
+}
+
+@media (max-width: 850px) {
+  .content {
+    flex-direction: column;
+  }
+  .img-container,
+  .product-info {
+    width: 100%;
+  }
+
+  .img-container {
+    position: relative;
+  }
+
+  .product-price {
+    align-self: flex-end;
+    font-size: 2em;
+  }
+
+  .actions {
+    align-items: center;
+    justify-content: end;
+  }
+
+  .add-cart {
+    padding: 1.2em;
+  }
 }
