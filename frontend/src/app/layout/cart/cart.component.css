@@ -1,0 +1,162 @@
+.cart {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  pointer-events: auto;
+  cursor: pointer;
+  animation: fadeIn 0.3s ease;
+}
+
+.content {
+  height: 100vh;
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  border-radius: 16px 0 0 16px;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
+  padding: 1.5em;
+  position: relative;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.3s ease;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  background: #f3f4f6;
+  padding: 1em;
+  border-radius: 8px;
+}
+
+.cart-item .info h4 {
+  margin: 0 0 0.3em 0;
+}
+
+.remove-btn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.5em 0.8em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.footer {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1em;
+  margin-top: 1em;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  font-size: 1.1em;
+}
+
+.checkout-btn {
+  width: 100%;
+  background-color: #1e40af;
+  color: white;
+  border: none;
+  padding: 0.9em;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.empty {
+  text-align: center;
+  color: #555;
+  margin-top: 2em;
+}
+
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-top: 0.5em;
+}
+
+.quantity-control button {
+  background-color: #e2e8f0;
+  border: none;
+  padding: 0.4em 0.6em;
+  font-size: 1.1em;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.quantity-control button:hover {
+  background-color: #cbd5e1;
+}
+
+.delete-btn {
+  color: #dc2626;
+  font-size: 1.6em;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+@keyframes fadeIn {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    max-width: 100%;
+    border-radius: 0;
+  }
+}

@@ -1,5 +1,5 @@
 .content {
-  padding: 1.8em;
+  padding: 1.5em;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 1px 1px 4px 1px #0000002c;
@@ -17,7 +17,6 @@
 
 .button {
   width: 50%;
-  margin-bottom: 1em;
   padding: 0.7em 1em;
   border: none;
   background-color: #191e25;

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from "@angular/common";
+import { CartService } from "../../services/cart.service";
 
 @Component({
     selector: "header-layout",
@@ -12,7 +13,13 @@ import { CommonModule } from "@angular/common";
 export class HeaderComponent implements OnInit {
     search: string = ""
     pages: { name: string, route: string }[] = [{ name: "Produtos", route: "" }, { name: "Gerenciamento", route: "management" }]
-    constructor(private readonly router: Router, private readonly route: ActivatedRoute) { }
+
+    constructor(
+        private readonly router: Router,
+        private readonly route: ActivatedRoute,
+        private readonly cartService: CartService
+    ) { }
+
     ngOnInit(): void {
         this.route.queryParamMap.subscribe(params => {
             this.search = params.get('search') ?? '';
@@ -31,11 +38,19 @@ export class HeaderComponent implements OnInit {
         }
     }
 
+    handleOpenCart() {
+        this.cartService.open()
+    }
+
     handleHome() {
         this.router.navigateByUrl("/")
     }
 
     handleNavigate(route: string) {
         this.router.navigateByUrl(route)
+    }
+
+    getCartQuantity() {
+        return this.cartService.getTotalQuantity()
     }
 }

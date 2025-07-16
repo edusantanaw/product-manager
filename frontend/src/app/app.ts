@@ -3,10 +3,17 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './layout/header/header.component';
 import 'zone.js';
 import { CommonModule } from '@angular/common';
+import { CartComponent } from './layout/cart/cart.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, CommonModule, RouterModule],
+  imports: [
+    RouterOutlet,
+    HeaderComponent,
+    CommonModule,
+    RouterModule,
+    CartComponent
+  ],
   templateUrl: './app.html',
 })
 export class App {

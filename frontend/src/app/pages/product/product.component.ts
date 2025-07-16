@@ -1,12 +1,11 @@
+import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
+import { PageContainerComponent } from "../../components/page-container/page-container.component";
+import { PaginationComponent } from "../../components/pagination/pagination.component";
+import { CapitalizeWordsPipe } from "../../pipes/capitalize-words.pipe";
 import { ProductService } from "../../services/product.service";
 import { Product } from "../../types/product";
-import { CommonModule } from "@angular/common";
-import { ActivatedRoute, Router, RouterModule } from "@angular/router";
-import { PaginationComponent } from "../../components/pagination/pagination.component";
-import { PageContainerComponent } from "../../components/page-container/page-container.component";
-import { CapitalizeWordsPipe } from "../../pipes/capitalize-words.pipe";
-import { NewProductComponent } from "../../components/new-product/new-product.component";
 
 @Component({
     selector: "product-screen",

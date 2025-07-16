@@ -77,3 +77,29 @@
 .pages li:hover {
   color: #00b7ff;
 }
+
+.cart {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.cart:hover {
+  color: #00b7ff;
+}
+
+.cart-itens{
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: #006eff;
+  color: white;
+  font-size: 0.65em;
+  font-weight: 700;
+  padding: 0.4em;
+  border-radius: 9999px;
+  box-shadow: 0 0 2px #000;
+  text-align: center;
+  z-index: -1;
+}

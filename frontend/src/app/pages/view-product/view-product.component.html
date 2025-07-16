@@ -1,11 +1,13 @@
 <page-container>
   <div class="content" *ngIf="!loading">
-    <img
-      class="product-img"
-      [src]="getProductImage()"
-      [alt]="product.name"
-      (error)="onImageError($event)"
-    />
+    <div class="img-container">
+      <img
+        class="product-img"
+        [src]="getProductImage()"
+        [alt]="product.name"
+        (error)="onImageError($event)"
+      />
+    </div>
     <div class="product-info">
       <h2 class="product-name">{{ product.name | capitalizeWords }}</h2>
       <div
@@ -20,8 +22,15 @@
         {{ showFullDescription ? "Ver menos" : "Ver mais" }}
       </span>
       <span class="product-price">{{ formatPrice(product.price) }}</span>
-      <div>
-        <button class="add-cart">Adicionar ao carrinho</button>
+      <div class="actions">
+        <div class="quantity-control">
+          <button (click)="decrease()">−</button>
+          <span>{{ itemQtd }}</span>
+          <button (click)="increase()">+</button>
+        </div>
+        <button (click)="addProduct()" class="add-cart">
+          Adicionar ao carrinho
+        </button>
       </div>
     </div>
   </div>

@@ -14,11 +14,15 @@
     <ul class="pages">
       <li
         *ngFor="let page of pages"
-        [ngClass]="{ 'selected': isCurrentPage(page.route) }"
+        [ngClass]="{ selected: isCurrentPage(page.route) }"
         (click)="handleNavigate(page.route)"
       >
         {{ page.name }}
       </li>
     </ul>
+    <span class="material-symbols-outlined cart" (click)="handleOpenCart()">
+      <span class="cart-itens" *ngIf="getCartQuantity() > 0"></span>
+      shopping_cart
+    </span>
   </div>
 </header>

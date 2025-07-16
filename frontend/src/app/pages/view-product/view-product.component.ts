@@ -6,6 +6,7 @@ import { PageContainerComponent } from "../../components/page-container/page-con
 import { CommonModule } from "@angular/common";
 import { CapitalizeWordsPipe } from "../../pipes/capitalize-words.pipe";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
+import { CartService } from "../../services/cart.service";
 
 @Component({
     standalone: true,
@@ -24,12 +25,14 @@ export class ViewProductComponent implements OnInit {
     loading: boolean = true
     showFullDescription: boolean = false;
     defaultImgPath: string = "assets/default-product.png"
+    itemQtd: number = 1
 
     constructor(
         private readonly activedRoute: ActivatedRoute,
         private readonly productService: ProductService,
         private readonly router: Router,
-        private readonly sanitizer: DomSanitizer
+        private readonly sanitizer: DomSanitizer,
+        private readonly cartService: CartService
     ) { }
 
     ngOnInit(): void {
@@ -96,5 +99,18 @@ export class ViewProductComponent implements OnInit {
         this.showFullDescription = !this.showFullDescription;
     }
 
+    addProduct() {
+        this.cartService.addToCart(this.product, this.itemQtd)
+        this.cartService.open()
+    }
+
+    increase() {
+        this.itemQtd += 1
+    }
+
+    decrease() {
+        if (this.itemQtd === 1) return
+        this.itemQtd -= 1
+    }
 }
 

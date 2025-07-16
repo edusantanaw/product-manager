@@ -1,0 +1,45 @@
+<div class="cart" *ngIf="isOpen">
+  <div class="bg" (click)="closeCart()"></div>
+
+  <div class="content">
+    <div class="header">
+      <h2>Seu Carrinho</h2>
+      <button class="close-btn" (click)="closeCart()">×</button>
+    </div>
+
+    <div class="cart-items">
+      <div *ngIf="cartItems.length === 0" class="empty">
+        Seu carrinho está vazio.
+      </div>
+
+      <div class="cart-item" *ngFor="let item of cartItems">
+        <div class="info">
+          <h4>{{ item.product.name }}</h4>
+          <p>{{ item.product.price | currency : "BRL" }}</p>
+
+          <div class="quantity-control">
+            <button (click)="decrease(item.product.id)">−</button>
+            <span>{{ item.quantity }}</span>
+            <button (click)="increase(item.product.id)">+</button>
+          </div>
+        </div>
+
+        <span
+          (click)="removeItem(item.product.id)"
+          class="material-symbols-outlined delete-btn"
+          title="Remover do carrinho"
+        >
+          delete
+        </span>
+      </div>
+    </div>
+
+    <div class="footer" *ngIf="cartItems.length > 0">
+      <div class="total">
+        <strong>Total:</strong>
+        <span>{{ total | currency : "BRL" }}</span>
+      </div>
+      <button class="checkout-btn">Finalizar Compra</button>
+    </div>
+  </div>
+</div>
