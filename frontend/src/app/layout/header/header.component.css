@@ -1,11 +1,14 @@
 .app-header {
-  padding: 2em;
+  padding: 1em;
   background: #0d0c1d;
   width: 100%;
+  position: fixed;
+  z-index: 10;
+  top: 0;
 }
 
 .content {
-  width: 58%;
+  width: 60%;
   margin-inline: auto;
   color: #e2e2e2;
   display: flex;
@@ -15,21 +18,25 @@
 
 .icon {
   all: unset;
-  padding: 0.4em;
+  padding: 0.6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  background: none;
+  background-color: #1a1a2e;
+  border-radius: 8px;
   color: #fff;
-  border-radius: 5px;
-  transition: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  transition: all 0.2s ease;
 }
 
 .icon span {
-  font-size: 2em;
+  font-size: 1.8em;
 }
 
 .icon:hover {
-  background: #ffffff11;
-  color: red;
+  background-color: #301b3f;
+  color: #006eff;
+  transform: scale(1.05);
 }
 
 .search {

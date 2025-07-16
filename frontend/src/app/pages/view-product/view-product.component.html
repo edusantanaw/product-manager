@@ -1,0 +1,28 @@
+<page-container>
+  <div class="content" *ngIf="!loading">
+    <img
+      class="product-img"
+      [src]="getProductImage()"
+      [alt]="product.name"
+      (error)="onImageError($event)"
+    />
+    <div class="product-info">
+      <h2 class="product-name">{{ product.name | capitalizeWords }}</h2>
+      <div
+        [innerHTML]="getTruncatedDescription()"
+        class="product-description"
+      ></div>
+      <span
+        *ngIf="shouldShowToggle()"
+        (click)="toggleDescription()"
+        class="see-more"
+      >
+        {{ showFullDescription ? "Ver menos" : "Ver mais" }}
+      </span>
+      <span class="product-price">{{ formatPrice(product.price) }}</span>
+      <div>
+        <button class="add-cart">Adicionar ao carrinho</button>
+      </div>
+    </div>
+  </div>
+</page-container>

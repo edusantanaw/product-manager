@@ -1,0 +1,27 @@
+<div class="pagination" *ngIf="totalPages > 1">
+  <button
+    class="nav-button"
+    [disabled]="page <= 0"
+    (click)="handlePage(page - 1)"
+  >
+    <span class="material-symbols-outlined">chevron_left</span> Anterior
+  </button>
+
+  <ng-container *ngFor="let p of visiblePages">
+    <button
+      class="page-button"
+      [class.active]="p === page"
+      (click)="handlePage(p)"
+    >
+      {{ p + 1 }}
+    </button>
+  </ng-container>
+
+  <button
+    class="nav-button"
+    [disabled]="page + 1 >= totalPages"
+    (click)="handlePage(page + 1)"
+  >
+    Próximo <span class="material-symbols-outlined">chevron_right</span>
+  </button>
+</div>

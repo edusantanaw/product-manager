@@ -14,12 +14,10 @@ export class HeaderComponent implements OnInit {
     ngOnInit(): void {
         this.route.queryParamMap.subscribe(params => {
             this.search = params.get('search') ?? '';
-            this.handleSearch()
         });
     }
-
     handleSearch() {
-        if (this.search) {
+        if (this.search.trim().length > 0) {
             this.router.navigateByUrl(`?search=${this.search}`)
         }
     }

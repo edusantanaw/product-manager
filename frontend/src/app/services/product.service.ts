@@ -12,9 +12,14 @@ type IGetAllProductData = {
     providedIn: "root"
 })
 export class ProductService {
+    private baseURL: string = "http://localhost:3000/api/product"
     constructor(private readonly httpClient: HttpClient) { }
 
     getProducts(data: IGetAllProductData) {
-        return this.httpClient.get<{data: Product[], total: number}>(`http://localhost:3000/api/product?limit=${data.limit}&page=${data.page}&search=${data?.search}`)
+        return this.httpClient.get<{ data: Product[], total: number }>(`${this.baseURL}?limit=${data.limit}&page=${data.page}&search=${data?.search}`)
+    }
+
+    getProductById(id: string) {
+        return this.httpClient.get<Product>(`${this.baseURL}/${id}`)
     }
 }

@@ -1,15 +1,20 @@
-<div class="content">
+<page-container>
   <div *ngIf="loading">Loading</div>
   <ul *ngIf="!loading && products.length > 0" class="product-list">
-    <li *ngFor="let product of products" class="product-item">
+    <li
+      *ngFor="let product of products"
+      class="product-item"
+      (click)="handleViewProduct(product.id)"
+    >
       <img
-        [src]="product.image"
+        class="prouct-img"
+        [src]="getProductImage(product)"
         alt="{{ product.name }}"
         (error)="onImageError($event)"
       />
       <div>
         <h3>
-          {{ product.name }}
+          {{ product.name | capitalizeWords  }}
         </h3>
         <span class="text-lg font-bold text-green-600 text-end w-full">
           {{ formatPrice(product.price) }}
@@ -17,4 +22,9 @@
       </div>
     </li>
   </ul>
-</div>
+  <pagination-menager
+    [page]="page"
+    [totalPages]="totalPages"
+    [handlePage]="handlePage.bind(this)"
+  />
+</page-container>
