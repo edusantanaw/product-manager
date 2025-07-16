@@ -34,10 +34,13 @@ export class HeaderComponent implements OnInit {
     }
 
     handleSearch() {
-        if (this.search.trim().length > 0) {
-            this.router.navigateByUrl(`?search=${this.search}`)
+        if (this.search.trim().length === 0) {
+            this.router.navigateByUrl("")
+            return 
         }
+        this.router.navigateByUrl(`?search=${this.search}`)
     }
+
 
     handleOpenCart() {
         this.cartService.open()
@@ -48,7 +51,7 @@ export class HeaderComponent implements OnInit {
     }
 
     handleNavigate(route: string) {
-        if(this.showMobileMenu) this.showMobileMenu = false
+        if (this.showMobileMenu) this.showMobileMenu = false
         this.router.navigateByUrl(route)
     }
 

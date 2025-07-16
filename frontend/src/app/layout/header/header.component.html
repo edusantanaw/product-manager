@@ -16,6 +16,9 @@
         (keydown.enter)="handleSearch()"
         [(ngModel)]="search"
       />
+      <button class="search-btn" (click)="handleSearch()">
+        <span class="material-symbols-outlined">search</span>
+      </button>
     </div>
     <ul class="pages desktop">
       <li
