@@ -1,0 +1,47 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.8em 1.4em;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  color: #fff;
+}
+
+.icon {
+  font-size: 1.2em;
+}
+
+.primary {
+  background-color: #191e25;
+}
+
+.primary:hover {
+  background-color: #515963;
+}
+
+.secondary {
+  background-color: #475569;
+}
+
+.secondary:hover {
+  background-color: #64748b;
+}
+
+.danger {
+  background-color: #dc2626;
+}
+
+.danger:hover {
+  background-color: #ef4444;
+}
+
+.btn:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+  color: #fff;
+}

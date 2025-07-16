@@ -2,43 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 1.5em;
 }
 
 .header h2 {
-    font-weight: 500;
-    font-size: 1.6em;
-    text-transform: uppercase;
-}
-
-.create-product-btn {
-  margin-bottom: 1em;
-  padding: 0.9em 1em;
-  border: none;
-  background-color: #191e25;
-  color: #fff;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 0.97em;
-}
-
-.product-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    margin-top: 1em;
-}
-
-
-.product-list li {
-    width: 100%;
-    display: flex;
-    background-color: #fff;
-    padding: 1em;
-    border-radius: 5px;
-}
-
-.product-list li img {
-    width: 8em;
-    height: 5em;
-    object-fit: cover;
+  font-weight: 500;
+  font-size: 1.6em;
+  text-transform: uppercase;
 }

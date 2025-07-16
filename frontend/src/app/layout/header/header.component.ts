@@ -20,8 +20,9 @@ export class HeaderComponent implements OnInit {
     }
 
     isCurrentPage(pageRoute: string) {
-        if (pageRoute === "" && this.router.url.length > 1) return false
-        return this.router.url.includes(pageRoute)
+        const parsedUrl = this.router.url.split("?")[0]
+        if (pageRoute === "" && parsedUrl.length > 1) return false
+        return parsedUrl.includes(pageRoute)
     }
 
     handleSearch() {

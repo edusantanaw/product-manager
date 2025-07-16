@@ -1,12 +1,12 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router, RouterModule } from "@angular/router";
+import { ActivatedRoute, RouterModule } from "@angular/router";
 import { NewProductComponent } from "../../components/new-product/new-product.component";
 import { PageContainerComponent } from "../../components/page-container/page-container.component";
-import { PaginationComponent } from "../../components/pagination/pagination.component";
-import { CapitalizeWordsPipe } from "../../pipes/capitalize-words.pipe";
+import { ProductListComponent } from "../../components/product-list/product-list.component";
 import { ProductService } from "../../services/product.service";
 import { Product } from "../../types/product";
+import { AppButtonComponent } from "../../components/app-button/app-button.component";
 
 @Component({
     selector: "product-management",
@@ -18,8 +18,8 @@ import { Product } from "../../types/product";
         CommonModule,
         NewProductComponent,
         RouterModule,
-        PaginationComponent,
-        CapitalizeWordsPipe,
+        ProductListComponent,
+        AppButtonComponent
     ],
 })
 export class ProductManagementComponent implements OnInit {
@@ -29,14 +29,10 @@ export class ProductManagementComponent implements OnInit {
     totalPages: number = 0
     products: Product[] = []
     loading: boolean = true
-    defaultImgPath: string = "assets/default-product.png"
-
 
     constructor(
         private readonly productService: ProductService,
         private readonly activedRoute: ActivatedRoute,
-        private readonly router: Router,
-        private readonly cdr: ChangeDetectorRef
     ) { }
 
     ngOnInit(): void {
@@ -56,17 +52,12 @@ export class ProductManagementComponent implements OnInit {
                 this.products = [...(data?.data ?? [])];
                 this.getTotalPages(data.total)
                 this.loading = false
-                this.cdr.detectChanges(); 
             },
             error: (error) => {
+                console.log(error)
                 this.loading = false
-                this.cdr.detectChanges(); 
             }
         })
-    }
-
-    getProducts() {
-        return this.products
     }
 
     isLoading() {
@@ -75,45 +66,6 @@ export class ProductManagementComponent implements OnInit {
 
     getTotalPages(total: number) {
         this.totalPages = Math.ceil(total / this.limit);
-    }
-
-    getProductImage(product: Product) {
-        if (product.image) return product.image
-        return this.defaultImgPath
-    }
-
-    onImageError(event: Event) {
-        const target = event.target as HTMLImageElement;
-        target.src = this.defaultImgPath;
-    }
-
-    formatPrice(price: number) {
-        if (!price) return "R$ 0,00"
-        return price.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-        })
-    }
-
-    trackById(_index: number, item: any): number {
-        return item.id;
-    }
-
-    handlePage(page: number) {
-        let newPage = page
-        if (page < 0) {
-            newPage = 0;
-        }
-        if (page > (this.totalPages)) {
-            newPage = this.totalPages - 1
-        }
-        this.router.navigate([], {
-            relativeTo: this.activedRoute,
-            queryParams: {
-                page: newPage
-            },
-            queryParamsHandling: 'merge'
-        });
     }
 
     handleShowCreate() {

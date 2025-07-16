@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { PageContainerComponent } from '../../components/page-container/page-container.component';
 
 @Component({
     selector: 'app-not-found',

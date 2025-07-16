@@ -1,0 +1,40 @@
+<div>
+  <ul *ngIf="products.length > 0" class="product-list">
+    <li *ngFor="let product of products" class="product-item">
+      <div class="item">
+        <img
+          class="product-img"
+          [src]="getProductImage(product)"
+          alt="{{ product.name }}"
+          (error)="onImageError($event)"
+        />
+        <div class="infos">
+          <h3>
+            {{ product.name | capitalizeWords }}
+          </h3>
+          <span class="text-lg font-bold text-green-600 text-end w-full">
+            {{ formatPrice(product.price) }}
+          </span>
+        </div>
+      </div>
+      <span
+        (click)="setDeleteProductId(product.id)"
+        class="material-symbols-outlined delete-btn"
+      >
+        delete
+      </span>
+    </li>
+  </ul>
+  <pagination-menager
+    [page]="page"
+    [totalPages]="totalPages"
+    [handlePage]="handlePage.bind(this)"
+  />
+  <delete-product
+    *ngIf="deleteProductId && showDeleteProduct"
+    [id]="deleteProductId"
+    [onSuccess]="onUpdate.bind(this)"
+    [onClose]="handleCloseDeleteModal.bind(this)"
+  >
+  </delete-product>
+</div>

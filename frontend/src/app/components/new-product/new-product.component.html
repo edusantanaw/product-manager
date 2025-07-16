@@ -1,4 +1,4 @@
-<modal [onClose]="handleshow">
+<modal [onClose]="onCloseModal.bind(this)">
   <form
     class="create-product"
     [formGroup]="productForm"
@@ -64,16 +64,34 @@
       </small>
     </div>
 
-    <!-- Botões -->
     <div class="buttons">
-      <button type="submit" [disabled]="productForm.invalid">Salvar</button>
-      <button type="button" (click)="handleshow()">Cancelar</button>
+      <app-button
+        [disabled]="createRunning"
+        btnType="submit"
+        [disabled]="productForm.invalid"
+        label="Salvar"
+      >
+      </app-button>
+      <app-button
+        label="Cancelar"
+        [disabled]="createRunning"
+        (click)="handleshow()"
+        type="danger"
+      >
+      </app-button>
     </div>
   </form>
   <sweet-alert
-  *ngIf="confirmModal"
+    *ngIf="confirmModal"
     title="Sucesso"
     message="O produto foi criado com sucesso"
     [onConfirm]="onConfirm.bind(this)"
+  ></sweet-alert>
+  <sweet-alert
+    *ngIf="errorAlert"
+    title="Erro ao criar produto"
+    [success]="false"
+    [message]="errorMessage"
+    [onConfirm]="onConfirmError.bind(this)"
   ></sweet-alert>
 </modal>

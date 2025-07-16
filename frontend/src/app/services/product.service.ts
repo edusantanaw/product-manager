@@ -23,7 +23,11 @@ export class ProductService {
         return this.httpClient.get<Product>(`${this.baseURL}/${id}`)
     }
 
-    createProduct(data: any) {
+    createProduct(data: FormData) {
         return this.httpClient.post<Product>(`${this.baseURL}`, data)
+    }
+
+    deleteProduct(id: string) {
+        return this.httpClient.delete<Product>(`${this.baseURL}/${id}`)
     }
 }

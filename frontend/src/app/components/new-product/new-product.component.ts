@@ -6,6 +6,7 @@ import { Editor, NgxEditorComponent, NgxEditorMenuComponent } from 'ngx-editor';
 import { ProductService } from "../../services/product.service";
 import { ModalComponent } from "../modal/modal.component";
 import { SweetAlertComponent } from "../sweet-alert/sweet-alert.component";
+import { AppButtonComponent } from "../app-button/app-button.component";
 
 @Component({
     selector: "new-product",
@@ -19,7 +20,8 @@ import { SweetAlertComponent } from "../sweet-alert/sweet-alert.component";
         NgxEditorComponent,
         NgxEditorMenuComponent,
         ModalComponent,
-        SweetAlertComponent
+        SweetAlertComponent,
+        AppButtonComponent
     ],
 })
 export class NewProductComponent implements OnInit, OnDestroy {
@@ -31,6 +33,9 @@ export class NewProductComponent implements OnInit, OnDestroy {
     imagePreview: string | null = null;
     selectedImage: File | null = null;
     confirmModal: boolean = false;
+    errorAlert: boolean = false;
+    errorMessage: string = ""
+    createRunning: boolean = false
 
     constructor(
         private fb: FormBuilder,
@@ -65,13 +70,28 @@ export class NewProductComponent implements OnInit, OnDestroy {
         }
     }
 
+    onCloseModal() {
+        // not close the modal if there is a filled field
+        const values = this.productForm.value
+        for (const key in values) {
+            if (values[key].length > 0) return
+        }
+        this.handleshow()
+    }
+
     onConfirm() {
         this.confirmModal = false
         this.handleSuccess();
         this.handleshow();
     }
 
-    onSubmit() {
+    onConfirmError() {
+        this.errorAlert = false;
+        this.errorMessage = ""
+    }
+
+    async onSubmit() {
+        this.createRunning = true
         if (this.productForm.invalid) return;
         const description: string = this.productForm.value.description
         const parsed = this.sanitizer.sanitize(SecurityContext.HTML, description)
@@ -82,8 +102,17 @@ export class NewProductComponent implements OnInit, OnDestroy {
         if (this.selectedImage) {
             formData.append("image", this.selectedImage);
         }
-        this.productService.createProduct(formData).subscribe(() => {
-            this.confirmModal = true
+        this.productService.createProduct(formData).subscribe({
+            next: () => {
+                this.confirmModal = true
+                this.createRunning = false
+            },
+            error: (err) => {
+                const { error: { errors } } = err as { error: { errors: string[] } }
+                this.errorMessage = errors[0]
+                this.errorAlert = true
+                this.createRunning = false
+            }
         });
     }
 }

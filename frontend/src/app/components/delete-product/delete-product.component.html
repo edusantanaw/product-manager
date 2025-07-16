@@ -1,0 +1,23 @@
+<modal [onClose]="onClose">
+  <div class="content">
+    <h2>Remover produto</h2>
+    <p>Realmente deseja remover o produto?</p>
+    <div class="buttons">
+      <button class="button delete" (click)="onDelete()">Sim</button>
+      <button class="button cancel" (click)="onClose()">Não</button>
+    </div>
+  </div>
+  <sweet-alert
+    *ngIf="confirmModal"
+    title="Sucesso"
+    message="O produto foi removido com sucesso"
+    [onConfirm]="onConfirmDelete.bind(this)"
+  ></sweet-alert>
+  <sweet-alert
+    *ngIf="errorAlert"
+    title="Erro ao criar produto"
+    [success]="false"
+    [message]="errorMessage"
+    [onConfirm]="onConfirmError.bind(this)"
+  ></sweet-alert>
+</modal>

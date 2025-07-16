@@ -1,0 +1,32 @@
+.content {
+  padding: 1.8em;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px 1px #0000002c;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  overflow: auto;
+}
+
+.buttons {
+  display: flex;
+  width: 100%;
+  gap: 1em;
+}
+
+.button {
+  width: 50%;
+  margin-bottom: 1em;
+  padding: 0.7em 1em;
+  border: none;
+  background-color: #191e25;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.97em;
+}
+
+.delete {
+  background-color: rgb(238, 6, 6);
+}

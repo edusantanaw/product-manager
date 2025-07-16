@@ -1,0 +1,32 @@
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-top: 1em;
+}
+
+.product-list li {
+  width: 100%;
+  display: flex;
+  background-color: #fff;
+  padding: 1em;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.product-list li img {
+  width: 8em;
+  height: 5em;
+  object-fit: cover;
+}
+
+.item {
+  width: 100%;
+  display: flex;
+}
+
+.delete-btn {
+  font-size: 2em;
+  color: red;
+  cursor: pointer;
+}
