@@ -1,0 +1,15 @@
+<modal>
+  <div class="content">
+    <div class="message">
+      <h2>{{ title }}</h2>
+      <p>{{ message }}</p>
+    </div>
+    <span *ngIf="success" class="material-symbols-outlined icon success">
+      check_circle
+    </span>
+    <span *ngIf="!success" class="material-symbols-outlined icon failed">
+      block
+    </span>
+    <button (click)="onConfirm()" class="confirm">Confirmar</button>
+  </div>
+</modal>

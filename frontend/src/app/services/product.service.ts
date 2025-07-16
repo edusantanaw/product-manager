@@ -22,4 +22,8 @@ export class ProductService {
     getProductById(id: string) {
         return this.httpClient.get<Product>(`${this.baseURL}/${id}`)
     }
+
+    createProduct(data: any) {
+        return this.httpClient.post<Product>(`${this.baseURL}`, data)
+    }
 }

@@ -1,0 +1,79 @@
+<modal [onClose]="handleshow">
+  <form
+    class="create-product"
+    [formGroup]="productForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <h2>Cadastrar novo produto</h2>
+
+    <div class="form-group">
+      <label for="name">Nome:</label>
+      <input
+        id="name"
+        placeholder="Digite o nome do produto..."
+        type="text"
+        formControlName="name"
+      />
+      <small
+        *ngIf="
+          productForm.get('name')?.invalid && productForm.get('name')?.touched
+        "
+      >
+        Nome é obrigatório.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Preço:</label>
+      <input
+        id="price"
+        placeholder="R$ 999,02"
+        type="number"
+        formControlName="price"
+      />
+      <small
+        *ngIf="
+          productForm.get('price')?.invalid && productForm.get('price')?.touched
+        "
+      >
+        Preço inválido ou obrigatório.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Imagem:</label>
+      <input id="image" type="file" (change)="onFileSelected($event)" />
+      <img *ngIf="imagePreview" [src]="imagePreview" class="image-preview" />
+    </div>
+
+    <div class="form-group NgxEditor__Wrapper editor">
+      <label>Descrição:</label>
+      <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
+      <ngx-editor
+        [editor]="editor"
+        formControlName="description"
+        placeholder="Descrição do produto..."
+      ></ngx-editor>
+      <small
+        *ngIf="
+          productForm.get('description')?.invalid &&
+          productForm.get('description')?.touched
+        "
+      >
+        Descrição é obrigatória.
+      </small>
+    </div>
+
+    <!-- Botões -->
+    <div class="buttons">
+      <button type="submit" [disabled]="productForm.invalid">Salvar</button>
+      <button type="button" (click)="handleshow()">Cancelar</button>
+    </div>
+  </form>
+  <sweet-alert
+  *ngIf="confirmModal"
+    title="Sucesso"
+    message="O produto foi criado com sucesso"
+    [onConfirm]="onConfirm.bind(this)"
+  ></sweet-alert>
+</modal>

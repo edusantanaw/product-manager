@@ -1,0 +1,96 @@
+.content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.596);
+  cursor: pointer;
+}
+
+.create-product {
+  padding: 1.5em;
+  width: 45%;
+  min-height: 50vh;
+  max-height: 95vh;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px 1px #0000002c;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  overflow: auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 500;
+  margin-bottom: 0.3em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="file"] {
+  padding: 0.7em 0.8em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form-group small {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 0.3em;
+}
+
+.image-preview {
+  max-width: 100px;
+  max-height: 100px;
+  margin-top: 0.5em;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1em;
+  margin-top: 2em;
+}
+
+.buttons button {
+  padding: 0.7em 1.2em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.buttons button[type="submit"] {
+  background-color: #006eff;
+  color: white;
+}
+
+.buttons button[type="button"] {
+  background-color: #ccc;
+  color: black;
+}
+
+.editor {
+  padding: 0.5em;
+}

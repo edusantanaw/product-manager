@@ -11,7 +11,7 @@ import { Component, Input } from "@angular/core";
 export class PaginationComponent {
   @Input() page: number = 0;
   @Input() totalPages: number = 1;
-  @Input() handlePage: (page: number) => void = () => {};
+  @Input({ required: true }) handlePage: (page: number) => void = () => { };
 
   get visiblePages(): number[] {
     const pages: number[] = [];

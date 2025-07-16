@@ -11,5 +11,14 @@
         [(ngModel)]="search"
       />
     </div>
+    <ul class="pages">
+      <li
+        *ngFor="let page of pages"
+        [ngClass]="{ 'selected': isCurrentPage(page.route) }"
+        (click)="handleNavigate(page.route)"
+      >
+        {{ page.name }}
+      </li>
+    </ul>
   </div>
 </header>

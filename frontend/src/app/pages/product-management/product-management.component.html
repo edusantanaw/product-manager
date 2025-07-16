@@ -1,18 +1,22 @@
 <page-container>
-  <div *ngIf="loading">Loading</div>
-  <ul *ngIf="!loading && products.length > 0" class="product-list">
+  <div class="header">
+    <h2>Gerenciamento De Produtos</h2>
+    <button class="create-product-btn" (click)="handleShowCreate()">
+      Novo Produto
+    </button>
+  </div>
+  <ul *ngIf="!isLoading() && getProducts().length > 0" class="product-list">
     <li
-      *ngFor="let product of products"
+      *ngFor="let product of getProducts(); trackBy: trackById"
       class="product-item"
-      (click)="handleViewProduct(product.id)"
     >
       <img
-        class="prouct-img"
+        class="product-img"
         [src]="getProductImage(product)"
         alt="{{ product.name }}"
         (error)="onImageError($event)"
       />
-      <div>
+      <div class="infos">
         <h3>
           {{ product.name | capitalizeWords }}
         </h3>
@@ -27,4 +31,9 @@
     [totalPages]="totalPages"
     [handlePage]="handlePage.bind(this)"
   />
+  <new-product
+    *ngIf="showCreateProduct"
+    [handleshow]="handleShowCreate.bind(this)"
+    [handleSuccess]="fetchData.bind(this)"
+  ></new-product>
 </page-container>
