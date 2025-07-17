@@ -27,13 +27,11 @@ import { LoadPipe } from './validation/load.pipe';
 
 @Controller('/api/product')
 export class ProductController {
-  private appURL: string;
   private productUploadPath: string;
   constructor(
     private readonly productService: ProductService,
     configService: ConfigService,
   ) {
-    this.appURL = configService.get('APP_URL') as string;
     this.productUploadPath = configService.get('PRODUCT_UPLOAD_PATH') as string;
   }
 
