@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { ProductService } from "../../services/product.service";
@@ -61,7 +62,7 @@ export class ViewProductComponent implements OnInit {
     }
 
     getProductImage() {
-        if (this?.product?.image) return this.product.image
+        if (this?.product?.image) return `${environment.apiUrl}/product/image/${this.product.image}`
         return this.defaultImgPath
     }
 

@@ -6,6 +6,7 @@ import { Product } from "../../types/product";
 import { DeleteProductComponent } from "../delete-product/delete-product.component";
 import { PaginationComponent } from "../pagination/pagination.component";
 import { ConvertPricePipe } from "../../pipes/convert-price.pipe";
+import { environment } from "../../../environments/environment";
 
 @Component({
     selector: 'product-list',
@@ -37,7 +38,7 @@ export class ProductListComponent {
     ) { }
 
     getProductImage(product: Product) {
-        if (product.image) return product.image
+        if (product.image) return `${environment.apiUrl}/product/image/${product.image}`
         return this.defaultImgPath
     }
 

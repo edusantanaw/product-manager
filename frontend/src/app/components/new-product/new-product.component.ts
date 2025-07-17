@@ -109,8 +109,8 @@ export class NewProductComponent implements OnInit, OnDestroy {
             },
             error: (err) => {
                 console.log(err)
-                const { error: { error } } = err as { error: { error: string } }
-                this.errorMessage = error
+                const { error } = err as { error: { error: string } }
+                this.errorMessage = error?.error ?? "Erro desconhecido"
                 this.errorAlert = true
                 this.createRunning = false
             }

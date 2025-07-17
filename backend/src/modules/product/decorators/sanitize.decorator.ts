@@ -1,13 +1,7 @@
 // sanitize.decorator.ts
 import { Transform } from 'class-transformer';
-import sanitizeHtml from 'sanitize-html';
+import * as sanitizeHtml from 'sanitize-html';
 
-export function SanitizeHTML(options = {}) {
-  return Transform(({ value }) =>
-    sanitizeHtml(String(value ?? ''), {
-      allowedTags: [],
-      allowedAttributes: {},
-      ...options,
-    }),
-  );
+export function SanitizeHTML() {
+  return Transform(({ value }) => sanitizeHtml(String(value ?? '')));
 }

@@ -50,8 +50,8 @@ export class DeleteProductComponent {
                 this.cartService.removeFromCart(this.id)
             },
             error: (err) => {
-               const { error: { error } } = err as { error: { error: string } }
-                this.errorMessage = error
+                const { error } = err as { error: { error: string } }
+                this.errorMessage = error?.error ?? "Erro desconhecido"
                 this.errorAlert = true
                 this.deleteRunning = true
             }

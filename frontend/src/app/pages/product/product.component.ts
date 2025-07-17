@@ -8,6 +8,7 @@ import { ProductService } from "../../services/product.service";
 import { Product } from "../../types/product";
 import { ConvertPricePipe } from "../../pipes/convert-price.pipe";
 import { NoDataComponent } from "../../components/no-data/no-data.component";
+import { environment } from "../../../environments/environment";
 
 @Component({
     selector: "product-screen",
@@ -92,9 +93,8 @@ export class ProductComponent implements OnInit {
         });
     }
 
-
     getProductImage(product: Product) {
-        if (product.image) return product.image
+        if (product.image) return `${environment.apiUrl}/product/image/${product.image}`
         return this.defaultImgPath
     }
 
