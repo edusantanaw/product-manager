@@ -43,6 +43,23 @@ npm install
 npx run start
 ```
 
+## Projeto Online
+A aplicação está disponível em:
+
+🔗 https://product-test-management.netlify.app/
+
+Detalhes Técnicos
+Frontend: Angular, hospedado no Netlify
+
+Backend: NestJS, hospedado no Render
+
+Banco de dados: PostgreSQL (Render)
+
+⚠️ Observações Importantes
+Inicialização demorada: O servidor backend (e o banco) entram em estado de suspensão no Render após um tempo de inatividade. Por isso, a primeira requisição pode demorar alguns segundos.
+
+Imagens temporárias: Como o Render não oferece armazenamento persistente de arquivos, as imagens são apagadas automaticamente após um tempo.
+
 ## Telas: 
 
 ![home](docs/img/home.png)
