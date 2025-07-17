@@ -37,6 +37,7 @@
 .infos {
   width: 90%;
   overflow: hidden;
+  margin-left: 0.9em;
 }
 
 .infos h3 {
