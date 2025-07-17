@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, ILike, Repository } from 'typeorm';
 import { ProductEntity } from '../entity';
-import { CreateProductDto } from 'src/modules/product/validation/create-product.dto';
-import { UpdateProductDto } from 'src/modules/product/validation';
+import { ICreateProduct, IUpdateProduct } from './types/product';
 
 interface ILoadAllWithFilterAndPagination {
   limit: number;
@@ -17,7 +16,7 @@ export class ProductRepository {
     this.repository = dataSource.getRepository(ProductEntity);
   }
 
-  public async create(data: CreateProductDto): Promise<ProductEntity> {
+  public async create(data: ICreateProduct): Promise<ProductEntity> {
     const product = new ProductEntity()
       .setName(data.name)
       .setDescription(data.description)
@@ -27,7 +26,7 @@ export class ProductRepository {
     return createdProduct;
   }
 
-  public async update(data: UpdateProductDto) {
+  public async update(data: IUpdateProduct) {
     const product = new ProductEntity()
       .setId(data.id)
       .setName(data.name)

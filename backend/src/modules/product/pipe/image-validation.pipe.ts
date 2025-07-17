@@ -2,22 +2,33 @@ import { PipeTransform } from '@nestjs/common';
 import { InvalidUploadError } from '../error/invalid-upload';
 
 export class ImageValidationPipe implements PipeTransform {
-  transform(value?: Express.Multer.File) {
-    if (!value) return true;
+  private readonly validTypes = [
+    'image/jpeg',
+    'image/png',
+    'image/gif',
+    'image/webp',
+  ];
+  private readonly maxSize = 10 * 1024 * 1024;
 
-    const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-    const maxSize = 10 * 1024 * 1024;
+  transform(file?: Express.Multer.File): Express.Multer.File | undefined {
+    if (!file) return file;
 
-    if (value.size > maxSize) {
-      throw new InvalidUploadError(
-        'O arquivo excede o tamanho máximo permitido (10MB).',
-      );
-    }
-    if (!validTypes.includes(value.mimetype)) {
+    if (!this.isValidType(file.mimetype)) {
       throw new InvalidUploadError(
         'Tipo de arquivo inválido. Apenas imagens são permitidas.',
       );
     }
-    return value;
+
+    if (file.size > this.maxSize) {
+      throw new InvalidUploadError(
+        'O arquivo excede o tamanho máximo permitido (10MB).',
+      );
+    }
+
+    return file;
+  }
+
+  private isValidType(type: string): boolean {
+    return this.validTypes.includes(type);
   }
 }

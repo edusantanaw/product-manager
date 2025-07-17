@@ -17,7 +17,7 @@ import { ConfigService } from '@nestjs/config';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { createReadStream, existsSync } from 'fs';
-import { join } from 'path';
+import { basename, join } from 'path';
 import { ProductService } from './product.service';
 import { UpdateProductDto } from './validation';
 import { CreateProductDto } from './validation/create-product.dto';
@@ -42,21 +42,19 @@ export class ProductController {
   @HttpCode(HttpStatus.CREATED)
   public async create(
     @Body() data: CreateProductDto,
-    @UploadedFile(ImageValidationPipe) image?: Express.Multer.File,
+    @UploadedFile(new ImageValidationPipe()) image?: Express.Multer.File,
   ) {
-    const imageURL = image
-      ? `${this.appURL}/api/product/${image.filename}/image`
-      : undefined;
     const product = await this.productService.create({
       ...data,
-      image: imageURL,
+      imageFile: image,
     });
     return product;
   }
 
-  @Get(':name/image')
+  @Get('image/:name')
   public getImage(@Param('name') name: string, @Res() res: Response) {
-    const path = join(process.cwd(), `${this.productUploadPath}/${name}`);
+    const safeName = basename(name);
+    const path = join(process.cwd(), `${this.productUploadPath}/${safeName}`);
     if (!existsSync(path)) {
       return res.status(HttpStatus.NOT_FOUND).end();
     }
@@ -92,15 +90,12 @@ export class ProductController {
   public async update(
     @Param() params: LoadByIDValidationDto,
     @Body() data: UpdateProductDto,
-    @UploadedFile(ImageValidationPipe) image?: Express.Multer.File,
+    @UploadedFile(new ImageValidationPipe()) image?: Express.Multer.File,
   ) {
-    const imageURL = image
-      ? `${this.appURL}/api/product/${image.filename}/image`
-      : undefined;
     const product = await this.productService.update({
       ...data,
       id: params.id,
-      image: imageURL,
+      imageFile: image,
     });
     return product;
   }

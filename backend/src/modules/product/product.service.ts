@@ -16,7 +16,10 @@ export class ProductService {
   constructor(private readonly productRepository: ProductRepository) {}
 
   public async create(data: CreateProductDto): Promise<ProductEntity> {
-    const product = await this.productRepository.create(data);
+    const product = await this.productRepository.create({
+      ...data,
+      image: data.imageFile ? data.imageFile.filename : undefined,
+    });
     return product;
   }
 
@@ -37,7 +40,10 @@ export class ProductService {
   public async update(data: UpdateProductDto): Promise<ProductEntity> {
     const productExists = await this.productRepository.loadById(data.id);
     if (!productExists) throw new NotFoundError('Produto não encontrado!');
-    const updatedProduct = await this.productRepository.update(data);
+    const updatedProduct = await this.productRepository.update({
+      ...data,
+      image: data.imageFile ? data.imageFile.filename : undefined,
+    });
     return updatedProduct;
   }
 

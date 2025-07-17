@@ -1,6 +1,6 @@
-import { Transform, TransformFnParams } from 'class-transformer';
+import { Transform } from 'class-transformer';
 import { IsNotEmpty, IsPositive, IsString } from 'class-validator';
-import * as sanitizeHtml from 'sanitize-html';
+import { SanitizeHTML } from '../decorators/sanitize.decorator';
 
 export class CreateProductDto {
   @IsNotEmpty({ message: 'O nome é obrigatorio!' })
@@ -11,10 +11,7 @@ export class CreateProductDto {
   price: number;
   @IsNotEmpty()
   @IsString({ message: "O campo 'description' deve ser uma string" })
-  @Transform((params: TransformFnParams) => {
-    const desc = sanitizeHtml(params.value ?? '') as string;
-    return desc;
-  })
+  @SanitizeHTML()
   description: string;
-  image?: string;
+  imageFile?: Express.Multer.File;
 }

@@ -1,5 +1,6 @@
 import { Transform } from 'class-transformer';
 import { IsNotEmpty, IsPositive, IsString } from 'class-validator';
+import { SanitizeHTML } from '../decorators/sanitize.decorator';
 
 export class UpdateProductDto {
   @IsNotEmpty({ message: 'O nome é obrigatorio!' })
@@ -10,7 +11,8 @@ export class UpdateProductDto {
   price: number;
   @IsNotEmpty()
   @IsString({ message: "O campo 'description' deve ser uma string" })
+  @SanitizeHTML()
   description: string;
-  image?: string;
+  imageFile?: Express.Multer.File;
   id: string;
 }
